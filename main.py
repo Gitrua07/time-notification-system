@@ -7,6 +7,12 @@ once the desktop notification is triggered.
 import argparse
 import datetime
 
+def check_time(s: str) -> datetime.datetime:
+    try:
+        return datetime.datetime.strptime(s, "%I:%M%p")
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"not a valid time")
+
 def set_reminder():
     """Sets the reminder values, time and message."""
 
@@ -27,8 +33,8 @@ def get_reminder():
 
 def main():
     parser=argparse.ArgumentParser(description="sets up a timer")
-    parser.add_argument("time", type=float) #Fix this so it takes in time type
-    parser.add_argument("message", nargs="?",default="")
+    parser.add_argument("time", help="The goal time - format HH:MM AM/PM",type=check_time)
+    parser.add_argument("message", help="Add quotation marks", nargs="?",default="")
     args=parser.parse_args()
 
 if __name__ == "__main__":
