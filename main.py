@@ -1,7 +1,12 @@
 """This program sets a time and message. It triggers a desktop notification once the goal time is reached.
 
-Here lies the brief description of the program. Will expand on this later.
+Users will input a time and message. The time will be the goal time. And the message will pop up
+once the desktop notification is triggered.
 """
+
+import argparse
+import datetime
+
 def set_reminder():
     """Sets the reminder values, time and message."""
 
@@ -21,7 +26,10 @@ def get_reminder():
     """Gets the message and time that a time will trigger."""
 
 def main():
-    print("Hello World!")
+    parser=argparse.ArgumentParser(description="sets up a timer")
+    parser.add_argument("time", type=float) #Fix this so it takes in time type
+    parser.add_argument("message", nargs="?",default="")
+    args=parser.parse_args()
 
 if __name__ == "__main__":
     main()
