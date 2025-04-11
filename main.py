@@ -3,39 +3,53 @@
 Users will input a time and message. The time will be the goal time. And the message will pop up
 once the desktop notification is triggered.
 """
-
 import argparse
 import datetime
+import json
 
 def check_time(s: str) -> datetime.datetime:
+    """Checks if the user inputted time is correct"""
     try:
         return datetime.datetime.strptime(s, "%I:%M%p")
     except ValueError:
         raise argparse.ArgumentTypeError(f"not a valid time")
 
-def set_reminder():
-    """Sets the reminder values, time and message."""
+def set_reminder(title: str, time: datetime, message: str) -> None:
+    """Sets the reminder values, time and message. And dumps it into JSON."""
+    
+    with open("reminder.json", mode="r", encoding="utf-8") as read_file:
+        reminder = json.load(read_file)
 
-def set_message():
-    """Sets up the message string value."""
+    reminder_data = {
+        "title": title,
+        "time": time,
+        "message": message
+    }
 
-def set_time():
-    """Sets the goal time for the notification."""
+    reminder.append(reminder_data)
 
-def get_time():
-    """Gets the time that the notification will be triggered on."""
+    with open("reminder.json", mode="w", encoding="utf-8") as write_file:
+        json.dump(reminder, write_file, indent=2)
 
-def get_message():
-    """Gets the message for a specific goal time."""
-
-def get_reminder():
-    """Gets the message and time that a time will trigger."""
+def get_reminder() -> dict:
+    """Gets the message and time that a time will trigger. Gets it from JSON."""
+    with open("reminder.json", mode="r", encoding="utf-8") as read_file:
+        reminder_data = json.load(read_file)
+    
+    return reminder_data
 
 def main():
     parser=argparse.ArgumentParser(description="sets up a timer")
+    parser.add_argument("title")
     parser.add_argument("time", help="The goal time - format HH:MM AM/PM",type=check_time)
     parser.add_argument("message", help="Add quotation marks", nargs="?",default="")
     args=parser.parse_args()
+
+    title = args.title
+    time = args.time.strftime("%I:%M%p")
+    message = args.message
+
+    set_reminder(title, time, message)
 
 if __name__ == "__main__":
     main()
