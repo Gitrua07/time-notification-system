@@ -38,7 +38,7 @@ def get_reminder() -> dict:
     
     return reminder_data
 
-def main():
+def main() -> None:
     parser=argparse.ArgumentParser(description="sets up a timer")
     parser.add_argument("title")
     parser.add_argument("time", help="The goal time - format HH:MM AM/PM",type=check_time)

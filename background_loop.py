@@ -11,8 +11,13 @@ import json
 from winotify import Notification, audio
 
 def check_time() -> str:
-    """This functin checks if the current time is equal to the goal time
+    """This function checks if the current time is equal to the goal time
         if it is, then it will stop the loop.
+
+        It will check if current_time == goal time. It sets the return
+        value to True if it is. And calls a desktop notification
+        using the winotify library. It will send out a notification
+        visual and sound.
     """
     current_time = datetime.datetime.now().time().strftime("%I:%M%p")
     dump_data = []
@@ -47,7 +52,7 @@ def check_time() -> str:
     
     return result
 
-async def wait_timer():
+async def wait_timer() -> None:
     """This program loops until it meets the goal time"""
     while True:
         loop = asyncio.get_event_loop()
@@ -59,7 +64,7 @@ async def wait_timer():
         
         await asyncio.sleep(10)
 
-async def main():
+async def main() -> None:
     await wait_timer()
 
 if __name__ == "__main__":
