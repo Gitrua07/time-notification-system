@@ -31,13 +31,6 @@ def set_reminder(title: str, time: datetime, message: str) -> None:
     with open("reminder.json", mode="w", encoding="utf-8") as write_file:
         json.dump(reminder, write_file, indent=2)
 
-def get_reminder() -> dict:
-    """Gets the message and time that a time will trigger. Gets it from JSON."""
-    with open("reminder.json", mode="r", encoding="utf-8") as read_file:
-        reminder_data = json.load(read_file)
-    
-    return reminder_data
-
 def main() -> None:
     parser=argparse.ArgumentParser(description="sets up a timer")
     parser.add_argument("title")
