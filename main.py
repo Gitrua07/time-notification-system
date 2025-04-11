@@ -25,7 +25,7 @@ def set_reminder(title: str, time: datetime, message: str) -> None:
         "time": time,
         "message": message
     }
-
+    
     reminder.append(reminder_data)
 
     with open("reminder.json", mode="w", encoding="utf-8") as write_file:
