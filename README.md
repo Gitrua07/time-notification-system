@@ -10,20 +10,20 @@ the library asyncio is used to create an background event loop which checks if t
 And eventually notifies the user using winotify. Uses the command line for user input. When entering the
 program in Windows 10/11, it will be formatted like: ./timer.bat <title> <goal_time> <optional_message>
 
-## main.py
+### main.py
 
 Where all the main functionality resides. It sets the reminder based on the user input. Uses argparse
 for CLI. 
 
-## background_loop.py
+### background_loop.py
 
 Implements the background loop using asyncio. Checks every 10 seconds if the time condition has been met.
 
-## reminder.json
+### reminder.json
 
 This list is where all the reminder data is stored. Will be dumped when the time goal has been reached. 
 
-## timer.bat
+### timer.bat
 
 Executes whole program.
 
